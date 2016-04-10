@@ -16,6 +16,7 @@ static zend_string *zend_string_init(const char *str, size_t len)
 
 	memcpy(ret->val, str, len);
 	ret->len = len;
+	ret->val[len] = '\0';
 	return ret;
 }
 
@@ -28,6 +29,6 @@ static zend_string *zend_string_alloc(size_t len)
 int main()
 {
   char const *src = "我是吴彦祖！";
-  zend_string *zs = zend_string_init(src, sizeof("我是吴彦祖！"));
-  printf("%s\n%d\n%d\n%d\n", zs->val, zs->len, sizeof(size_t), sizeof("我是吴彦祖！"));
+  zend_string *zs = zend_string_init(src, strlen(src) + 1);
+  printf("%s\n%d\n%d\n%d\n%d\n", zs->val, zs->len, sizeof(size_t), sizeof("我是吴彦祖！"), strlen(src));
 }
