@@ -15,7 +15,7 @@ ZEND_END_MODULE_GLOBALS(yaconf)
 typedef struct _zend_yaconf_globals {
   char *directory;
   int parse_err;
-#idndef ZTS
+#ifndef ZTS
   long check_delay;
   time_t last_check;
   time_t directory_mtime;
