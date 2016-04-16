@@ -8,7 +8,7 @@ void yyerror(char const *);
 
 %pure_parser
 
-%token T_BEGIN=1
+%token T_BEGIN
 %token T_NUMBER
 %token T_LOWER_CHAR
 %token T_UPPER_CHAR	
