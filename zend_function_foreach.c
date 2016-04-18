@@ -46,3 +46,21 @@ PHP_FUNCTION(test_foreach)
   RETURN_TRUE;
 }
 
+## php里面调用自己定义的函数
+PHP_FUNCTION(test_call_func)
+{
+  zval retval;
+  zend_fcall_info fci;
+  zend_fcall_info_cache fci_cache;
+
+  if(zend_parse_parameters(ZEND_NUM_ARGS(), "f*", &fci, &fci_cache, &fci.params, &fci.param_count) == FAILURE) {
+    return ;
+  }
+
+  fci.retval = &retval;
+
+  if(zend_call_function(&fci, &fci_cache) == SUCCESS && Z_TYPE(retval) != IS_UNDEF) {
+    ZVAL_COPY_VALUE(return_value, &retval);
+  }
+
+}
