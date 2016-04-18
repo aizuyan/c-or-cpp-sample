@@ -1,3 +1,24 @@
+### ZEND_HASH_FOREACH_STR_KEY_VAL展开
+```c
+ZEND_HASH_FOREACH_STR_KEY_VAL(ht, key, element) {
+
+} ZEND_HASH_FOREACH_END();
+```
+展开之后为：
+```c
+do{
+  Bucket *_p = (ht)->arData;
+  Bucket *_end = _p + (ht)->nNumUsed;
+  for(;_p != _end; _p++) {
+    zval *_z = &_p->val;
+    if(UNEXPECTED(Z_TYPE_P(_z)) == IS_UNDEF)
+      continue;
+    key = _p->key;
+    element = _z;
+  }
+}while(0);
+```
+
 PHP_FUNCTION(test_foreach)
 {
   HashTable *arr;
