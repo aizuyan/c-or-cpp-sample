@@ -28,7 +28,8 @@
  *  (03) 任意节点的左、右子树也分别为二叉查找树。
  *  (04) 没有键值相等的节点（no duplicate nodes）。
  *
- *
+ *  
+ *  GDB调试资料http://linuxtools-rst.readthedocs.io/zh_CN/latest/tool/ldd.html
  *
  */
 
