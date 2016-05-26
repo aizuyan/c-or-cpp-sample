@@ -19,8 +19,15 @@
 ```
 最主要的是`(((zend_yaconf_globals *) (*((void ***) tsrm_ls))[yaconf_globals_id-1])->v)`这一段，这个怎么理解呢？
 首先是`tsrm_ls`这个在php各种module的入口中定义的，所有线程共享一个，用来通过id存储不同线程的全局变量
+
+
 1. 首先将`tsrm_ls`转为`void ***`类型。 => `(void ***) tsrm_ls`
+
 2. 取`tsrm_ls`的值，值的类型为`void **`。=> `*((void ***) tsrm_ls)`
+
 3. 取上一步得到的值的第`yaconf_globals_id-1`个值（这里相当于数组），类型为`void *`。=> `(*((void ***) tsrm_ls))[yaconf_globals_id-1]`
+
 4. 将上一步获取到的`void *`类型的值转化为`zend_yaconf_globals *`类型。=> `(zend_yaconf_globals *) (*((void ***) tsrm_ls))[yaconf_globals_id-1]`
+
 5. 获取`zend_yaconf_globals`结构体中的v值。
+
